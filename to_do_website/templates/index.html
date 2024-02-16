@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+
+<body>
+    <div>
+        <div>
+            <h1>
+                <img src="\static\images\notebook.png" class="notebook">
+                <div class="header"> My To Do List </div>
+                <img src="\static\images\pencil.png" class="notebook">
+            </h1>
+        </div>
+        
+        <div>
+            <form action="/add" method="post">
+                <div class="type_task">
+                    <label class="new_task">My New To Do Task</label>
+                    <input type="text" name="task" placeholder="Enter a Task" class="new_task_input">
+                    <button type="submit" class="new_task_button">Add My Task</button>
+                </div>
+            </form> 
+        </div>
+
+        <div>
+            {% if success %}
+            <div>
+                <p class="added_task">{{ success }}</p>
+            </div>
+            {% endif %}
+    
+            {% if message %}
+            <div>
+                <p class="add_error">{{ message }}</p>
+            </div>
+            {% endif %}
+    
+            {% if edition %}
+            <div>
+                <p class="added_task">{{ edition }}</p>
+            </div>
+            {% endif %}
+    
+            {% if error %}
+            <div>
+                <p class="add_error">{{ error }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <div>
+            <table class="table_border">
+                <tr class="table_border">
+                    <th width="200">Task Number</th>
+                    <th width="200">Task Title</th>
+                    <th width="200">Date / Time</th>
+                    <th width="200">Edit Task?</th>
+                    <th width="200">Complete / Incomplete</th>
+                    <th width="200">Delete Task</th>
+                </tr>
+
+                {% for todo in todo_list %}
+
+                    <tr>
+                        <th>{{ todo.id }}</th>
+                        <th>{{ todo.task }}</th>
+                        <th>Date / Time</th>
+                        <th>
+                            <form action="/edit/{{ todo.id }}" method="post">
+                                <div>
+                                    <input type="text" name="edit_task" placeholder="Edit Task">
+                                    <button type="submit">Change Task</button>
+                                </div>
+                            </form>
+                        </th>
+                        <th>
+                            {% if todo.complete == False %}
+                            <p>Task Incomplete. <a href="/update/{{ todo.id }}"><br>Mark as Complete?</a></p>
+            
+                            {% else %}
+                            <p>Task Complete. <a href="/update/{{ todo.id }}"><br>Mark as Incomplete?</a></p>
+                            {% endif %}
+                        </th>
+                        <th> <a href="/delete/{{ todo.id }}"> Delete Task?</a> </th>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

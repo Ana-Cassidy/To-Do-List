@@ -1,0 +1,88 @@
+body{
+    /* colou: cosmic latte */
+    background-color: rgb(248, 244, 227); 
+}
+
+h1{
+    background-color: rgb(253, 157, 128);
+    color: rgb(42, 43, 42);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    font-size: 60px;
+}
+
+.header{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.notebook{
+    width: 40px;
+    height: 40px;
+
+}
+
+.type_task{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .form_size{
+    margin-left: 50%;
+    margin-right: 50%;
+}*/
+
+.new_task{
+    font-size: 25px;
+    color: rgb(42, 43, 42)
+}
+
+.new_task_input{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 25%;
+    padding: 0.5%;
+    border: dotted 0.5px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(112, 108, 97)
+}
+
+.new_task_button{
+    padding: 0.5%;
+    border: dotted 0.5px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(235, 52, 98)
+}
+
+.table_border{
+    border: 1px;
+}
+
+.added_task{
+    color: green
+}
+
+.add_error{
+    color: red
+}
+
+.colour_cerise{
+    color: rgb(229, 68, 109)
+}
+
+.colour_coral{
+    color: rgb(255, 137, 102)
+}
+
+.colour_dimgray{
+    color: rgb(112, 108, 97)
+}
+
+.colour_jet{
+    color: rgb(42, 43, 42)
+}
