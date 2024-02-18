@@ -24,9 +24,18 @@
                 <div class="type_task">
                     <label class="new_task">My New To Do Task</label>
                     <input type="text" name="task" placeholder="Enter a Task" class="new_task_input">
+
+                </div>
+                <div>
+                    <label>Date</label>
+                    <input type="date" name="new_task_date">
+                </div>
+                <div>
+                    <label>Time</label>
+                    <input type="time" name="new_task_time">
                     <button type="submit" class="new_task_button">Add My Task</button>
                 </div>
-            </form> 
+            </form>
         </div>
 
         <div>
@@ -60,12 +69,15 @@
         <div>
             <table class="table_border">
                 <tr class="table_border">
-                    <th width="200">Task Number</th>
-                    <th width="200">Task Title</th>
-                    <th width="200">Date / Time</th>
-                    <th width="200">Edit Task?</th>
+                    <th width="100">Task Number</th>
+                    <th width="100">Task Title</th>
+                    <th width="100">Date</th>
+                    <th width="100">Time</th>
+                    <th width="250">Edit Task Details?</th>
                     <th width="200">Complete / Incomplete</th>
-                    <th width="200">Delete Task</th>
+                    <th width="200">Date of Completion</th>
+                    <th width="150">Time of Completion</th>
+                    <th width="100">Delete Task</th>
                 </tr>
 
                 {% for todo in todo_list %}
@@ -73,21 +85,71 @@
                     <tr>
                         <th>{{ todo.id }}</th>
                         <th>{{ todo.task }}</th>
-                        <th>Date / Time</th>
+                        <th>{{ todo.date }}</th>
+                        <th>{{ todo.time }}</th>
                         <th>
-                            <form action="/edit/{{ todo.id }}" method="post">
+                            <form action="/edit_task/{{ todo.id }}" method="post">
                                 <div>
                                     <input type="text" name="edit_task" placeholder="Edit Task">
-                                    <button type="submit">Change Task</button>
+                                    <button type="submit">OK</button>
+                                </div>
+                            </form>
+                            <form action="/edit_date/{{ todo.id }}" method="post">
+                                <div>
+                                    <input type="date" name="edit_date" placeholder="Edit Date">
+                                    <button type="submit">OK</button>
+                                </div>
+                            </form>
+                            <form action="/edit_time/{{ todo.id }}" method="post">
+                                <div>
+                                    <input type="time" name="edit_time" placeholder="Edit Time">
+                                    <button type="submit">OK</button>
                                 </div>
                             </form>
                         </th>
+                        
                         <th>
                             {% if todo.complete == False %}
                             <p>Task Incomplete. <a href="/update/{{ todo.id }}"><br>Mark as Complete?</a></p>
             
                             {% else %}
                             <p>Task Complete. <a href="/update/{{ todo.id }}"><br>Mark as Incomplete?</a></p>
+                            {% endif %}
+                        </th>
+
+                        <th>
+                            {% if todo.complete %}
+                            <form action="/update_date/{{ todo.id }}" method="post">
+                                <div>
+                                    <input type="date" name="finish_date" placeholder="Finish Date">
+                                    <button type="submit">OK</button>
+                                </div>
+                            </form>
+                                {{ todo.finish_date }}
+
+                            {% else %}
+                                Please Enter a Date When Completed
+                            {% endif %}
+                        </th>
+
+                        <th>
+                            {% if enter_date %}
+                            <div>
+                                {{ enter_date }}
+                            </div>
+                            {% endif %}
+                            
+                            {% if todo.complete %}
+                            <form action="/update_time/{{ todo.id }}" method="post">
+                                <div>
+                                    <input type="time" name="finish_time" placeholder="Finish Time">
+
+                                    <button type="submit">OK</button>
+                                </div>
+                            </form>
+                                {{ todo.finish_time }}
+                            {% else %}
+                                Please Enter a Time When Completed
                             {% endif %}
                         </th>
                         <th> <a href="/delete/{{ todo.id }}"> Delete Task?</a> </th>
